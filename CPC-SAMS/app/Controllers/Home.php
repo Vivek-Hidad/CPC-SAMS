@@ -14,6 +14,11 @@ class Home extends BaseController
         return view('login');
     }
 
+    public function logout()
+    {
+        return redirect()->to(base_url("/"));
+    }
+
    
 
     public function facultylogin()  {
@@ -59,14 +64,18 @@ class Home extends BaseController
                         $facultyModel= new FacultyModel();
                         $data['faculty']=$facultyModel->where('username', $username)->find();
             
-                        $data['faculty']=$data['faculty'][0];
-                        if($username == $data['faculty']['username'])
+                      
+                        
+                        if(!empty($data['faculty']))
                         {
+                            $data['faculty']=$data['faculty'][0];
+
                             if($password == $data['faculty']['password'])
                             {
                                 $name=$data['faculty']['name'];
                                 $role=$data['faculty']['coordinator']==true?"Coordinator":"Faculty"; 
                                 setcookie("name", $name, time() + (86400 * 30), "/");
+                                setcookie("id", $data['faculty']['id'], time() + (86400 * 30), "/");
                                 setcookie("username", $username, time() + (86400 * 30), "/");
                                 setcookie("password", $password, time() + (86400 * 30), "/");
                                 setcookie("login_token", true, time() + (86400 * 30), "/");

@@ -24,6 +24,17 @@ class SubjectModel extends Model{
                     ->findAll();
     }
 
+
+
+    public function setAllocateOnFacultyDelete($id)
+    {
+        return $this->set('allocated',false)
+                    ->where('subjects.id IN (SELECT subject_id FROM subjectallocation WHERE faculty_id = ' . (int) $id . ')', null, false)  // Use the $id parameter dynamically
+                    ->update();  // Execute the update query
+
+                                
+                            
+    }
    
 
 }

@@ -419,3 +419,18 @@ input[type="file"] {
     border: 1px solid #E3E3E3;
     border-radius: 4px;
   }
+
+  .subs-btns a{
+    padding: 8px 20px;
+    font-size: 1.2vw;
+    color: #fff;
+    background-color: rgb(43, 42, 42);
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none; 
+    
+  }
+
+  .allo-subs{
+    justify-content: space-between;
+  }

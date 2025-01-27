@@ -26,11 +26,11 @@
           <div class="card">
             <div class="header">
               <div class="heading">
-                <h2>Programs</h2>
+                <h2>Coordinators</h2>
               </div>
               <div class="add-btn">
-                <a href="/add-program" class="add-p">
-                  Add New
+                <a href="/add-coordinator" class="add-p">
+                  Add New Coordinator
                 </a>
               </div>
             </div>
@@ -51,17 +51,16 @@
                 	
                   
                       <?php
-                            foreach ($program as $row) {
+                            foreach ($coordinator as $row) {
                                 echo "<tr>";
                                 echo "<td>".$row['id']."</td>";
                                 echo "<td>".$row['program_name']."</td>";
-                                $f_n=$row['faculty_name']==""?"-":$row['faculty_name'];
-                                echo "<td>".$f_n."</td>";
+                                echo "<td>".$row['faculty_name']."</td>";
                             
                                 ?>
 
-                                <td><a href="<?= base_url('update-program/'.$row['id'])?>" class="material-icons">edit</a>
-                                <a href="<?= base_url('delete-program/'.$row['id'])?>" class="material-icons">delete</a></td>
+                                <td><a href="<?= base_url('update-coordinator/'.$row['id'])?>" class="material-icons">edit</a>
+                                <a href="<?= base_url('delete-coordinator/'.$row['id'])?>" class="material-icons">delete</a></td>
 
                             </tr>
 

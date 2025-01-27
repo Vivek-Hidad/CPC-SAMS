@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\ProgramModel;
+use App\Models\SubjectModel;
 
 
 class ProgramController extends BaseController
@@ -13,7 +14,9 @@ class ProgramController extends BaseController
     public function program()
     {
         $programmodel= new ProgramModel();
-        $data['program']=$programmodel->findAll();
+        // $data['program']=$programmodel->findAll();
+        $data['program']=$programmodel->getProgramwithCoor();
+
         return view('program-crud/allProgram',$data);
         
     }
@@ -26,6 +29,8 @@ class ProgramController extends BaseController
 
     public function delete_program($id)
     {
+        $subjectmmodel = new Subjectmodel();
+        $data=$subjectmmodel->where('program_id',$id)->delete();
         $programmodel = new Programmodel();
         $data=$programmodel->delete($id);
         return redirect()->to(base_url('/programs'));

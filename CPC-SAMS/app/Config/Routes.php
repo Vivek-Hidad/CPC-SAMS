@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Home::dashboard');
+$routes->get('/logout', 'Home::logout');
 $routes->match(['get','post'],'/f-login','Home::facultylogin');
 
 $routes->get('/programs', 'ProgramController::program');
@@ -48,5 +49,18 @@ $routes->get('/update-allocatesubject/(:num)', 'SubjectallocationController::upd
 $routes->match(['get','post'],'/allocatesubjectstore','SubjectallocationController::allocatesubject_store');
 $routes->match(['get','post'],'/update-allocatesubjectstore/(:num)','SubjectallocationController::update_allocatesubjectstore/$1');
 $routes->get('/delete-allocatesubject/(:num)', 'SubjectallocationController::delete_allocatesubject/$1');
+
+
+$routes->get('/allsubjects', 'AttendanceController::allsubjects');
+$routes->get('/suballstudents/(:num)/(:num)/(:num)', 'AttendanceController::allstudents/$1/$2/$3/$4');
+
+
+
+$routes->get('/coordinators', 'CoordinatorController::allcoordinators');
+$routes->get('/add-coordinator', 'CoordinatorController::add_coordinator');
+$routes->match(['get','post'],'/coordinatorstore','CoordinatorController::coordinatorstore');
+$routes->get('/delete-coordinator/(:num)', 'CoordinatorController::delete_coordinator/$1');
+$routes->get('/update-coordinator/(:num)', 'CoordinatorController::update_coordinator/$1');
+$routes->match(['get','post'],'/update-coordinatorstore/(:num)','CoordinatorController::update_coordinatorstore/$1');
 
 

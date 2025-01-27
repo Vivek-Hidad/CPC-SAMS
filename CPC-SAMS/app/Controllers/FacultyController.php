@@ -2,7 +2,12 @@
 
 namespace App\Controllers;
 use App\Models\FacultyModel;
-
+use App\Models\CoordinatorModel;
+use App\Models\ProgramModel;
+use App\Models\SubjectModel;
+use App\Models\SubjectallocationModel;
+use App\Models\StudentModel;
+use App\Models\SemesterModel;
 class FacultyController extends BaseController
 {
     
@@ -21,9 +26,17 @@ class FacultyController extends BaseController
 
     public function delete_faculty($id)
     {
-        $facultymodel = new Facultymodel();
-        $data=$facultymodel->delete($id);
-        return redirect()->to(base_url('/faculties'));
+        
+        $subjectmmodel = new Subjectmodel();
+        $data=$subjectmmodel->setAllocateOnFacultyDelete($id);
+
+
+       
+       $facultymodel = new Facultymodel();
+      $data=$facultymodel->delete($id);
+
+       
+      return redirect()->to(base_url('/faculties'));
     }
 
     public function update_faculty($id)
@@ -82,6 +95,7 @@ class FacultyController extends BaseController
                 'coordinator'=>$this->request->getVar('coordinator')==true?true:false,
         ];
 
+        $coord=$this->request->getVar('coordinator');
         if($this->validate($rules)){
                 $facultymodel = new facultymodel();
                 $facultymodel->find($id);
@@ -93,9 +107,15 @@ class FacultyController extends BaseController
                 
             ];
            
+           
             try{
 
                 $facultymodel->update($id,$fdata);
+                if($coord==false){
+                    $coordinatormodel= new CoordinatorModel();
+                    $coordinatormodel->where('faculty_id', $id)->delete();
+    
+                }
                 return redirect()->to(base_url('/faculties'));
       
             }catch(\Exception $e){
