@@ -104,6 +104,26 @@
                      
                    
                 </div>
+                <div class="row">
+
+                        <div>
+                            <label For="batch">Batch</label>
+                              
+                              <select name="batch" id="" class="dropdown" >
+                                <?php for ($i=1; $i <=5 ; $i++) { 
+                                  if($i==$student['batch']){
+                                    echo "<option selected value=".$i.">".$i."</option>";
+                                
+                                  } 
+                                  else{
+                                    echo "<option value=".$i.">".$i."</option>";
+                              
+                                  }
+                                }?>
+                                    
+                              </select>
+                        </div>
+                </div>
 
                 <?php
                         if(isset($validation)){?>

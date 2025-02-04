@@ -434,3 +434,7 @@ input[type="file"] {
   .allo-subs{
     justify-content: space-between;
   }
+
+  td .submit:hover{
+     color: white;
+   }

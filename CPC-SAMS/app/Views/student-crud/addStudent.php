@@ -48,7 +48,7 @@
                           placeholder="Enter Enrollment No"
                           
                         />
-                      </div>
+                    </div>
 
                     <div>
                       <label For="stud_name">Student Name</label>
@@ -93,6 +93,20 @@
                    
                 </div>
 
+                <div class="row">
+
+                        <div>
+                            <label For="batch">Batch</label>
+                              
+                              <select name="batch" id="" class="dropdown" >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </div>
+                </div>
                 <?php
                         if(isset($validation)){?>
                          <div class="row" style="color: crimson;">

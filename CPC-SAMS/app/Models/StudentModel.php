@@ -13,16 +13,19 @@ class StudentModel extends Model{
         'stud_name',
         'program_id',
         'semester_id',
+        'batch',
        
     ];
 
     public function getStudentsDetails()
     {
-        return $this->select('students.id AS id,enroll_no, stud_name,programs.program_name, semesters.semester')
+        return $this->select('students.id AS id,enroll_no,batch, stud_name,programs.program_name, semesters.semester')
                     ->join('programs', 'students.program_id = programs.id', 'inner')
                     ->join('semesters', 'students.semester_id = semesters.id', 'inner')
                     ->findAll();
     }
+
+   
 
 }
 

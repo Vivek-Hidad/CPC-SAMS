@@ -51,7 +51,7 @@
                                   
                                 ?>
 
-                                    <div class='subs-btns'><a href="<?= base_url('/suballstudents/' . $row['program_id'] . '/' . $row['semester_id'] . '/' . $row['subject_id'] . '/' ) ?>"><?=$row['sub_name']?></a></div>
+                                    <div class='subs-btns'><a href="<?= base_url('/alltopics/' . $row['program_id'] . '/' . $row['semester_id'] . '/' . $row['subject_id'] . '/' ) ?>"><?=$row['sub_name']?></a></div>
                                  
                                     <?php
                                     $a+=1;

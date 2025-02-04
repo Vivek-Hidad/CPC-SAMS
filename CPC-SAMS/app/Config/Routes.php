@@ -52,7 +52,11 @@ $routes->get('/delete-allocatesubject/(:num)', 'SubjectallocationController::del
 
 
 $routes->get('/allsubjects', 'AttendanceController::allsubjects');
-$routes->get('/suballstudents/(:num)/(:num)/(:num)', 'AttendanceController::allstudents/$1/$2/$3/$4');
+$routes->get('/alltopics/(:num)/(:num)/(:num)', 'AttendanceController::alltopics/$1/$2/$3/$4');
+$routes->get('/delete-topic/(:num)/(:num)/(:num)/(:num)', 'AttendanceController::delete_topic/$1/$2/$3/$4/$5');
+$routes->match(['get','post'],'/topicstore/(:num)/(:num)/(:num)','AttendanceController::topic_store/$1/$2/$3/$4');
+$routes->get('/attendance/(:num)/(:num)/(:num)/(:num)/(:num)', 'AttendanceController::allstudents/$1/$2/$3/$4/$5');
+$routes->match(['get','post'],'/attendancestore/(:num)/(:num)/(:num)/(:num)/(:num)','AttendanceController::attendance_store/$1/$2/$3/$4/$5');
 
 
 
@@ -62,5 +66,15 @@ $routes->match(['get','post'],'/coordinatorstore','CoordinatorController::coordi
 $routes->get('/delete-coordinator/(:num)', 'CoordinatorController::delete_coordinator/$1');
 $routes->get('/update-coordinator/(:num)', 'CoordinatorController::update_coordinator/$1');
 $routes->match(['get','post'],'/update-coordinatorstore/(:num)','CoordinatorController::update_coordinatorstore/$1');
+
+
+
+
+$routes->get('/timeslots', 'TimeslotController::timeslots');
+$routes->get('/add-timeslot', 'TimeslotController::add_timeslot');
+$routes->match(['get','post'],'/timeslotstore','TimeslotController::timeslot_store');
+$routes->get('/delete-timeslot/(:num)', 'TimeslotController::delete_timeslot/$1');
+$routes->get('/update-timeslot/(:num)', 'TimeslotController::update_timeslot/$1');
+$routes->match(['get','post'],'/update-timeslotstore/(:num)','TimeslotController::update_timeslotstore/$1');
 
 

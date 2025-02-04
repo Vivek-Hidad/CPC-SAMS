@@ -43,6 +43,10 @@
            <li>
               <a href="/coordinators">Coordinator</a>
            </li>
+
+           <li>
+              <a href="/timeslots">Time Slot</a>
+           </li>
            
             <li>
             <form action="/logout">

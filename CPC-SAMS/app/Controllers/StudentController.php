@@ -61,6 +61,7 @@ class StudentController extends BaseController
                   'enroll_no'=>$this->request->getVar('enroll_no'),
                   'program_id'=>$this->request->getVar('program_id'),
                   'semester_id'=>$this->request->getVar('semester_id'),
+                  'batch'=>$this->request->getVar('batch'),
               ];
               $studentmodel->save($data);
               
@@ -98,6 +99,8 @@ class StudentController extends BaseController
               'enroll_no'=>$this->request->getVar('enroll_no'),
               'program_id'=>$this->request->getVar('program_id'),
               'semester_id'=>$this->request->getVar('semester_id'),
+              'batch'=>$this->request->getVar('batch'),
+
             ];
 
           if($this->validate($rules)){
@@ -108,6 +111,8 @@ class StudentController extends BaseController
                   'enroll_no'=>$this->request->getVar('enroll_no'),
                   'program_id'=>$this->request->getVar('program_id'),
                   'semester_id'=>$this->request->getVar('semester_id'),
+                  'batch'=>$this->request->getVar('batch'),
+
                   ];
 
                 

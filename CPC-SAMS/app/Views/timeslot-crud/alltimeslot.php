@@ -22,10 +22,10 @@
         <div class="card">
             <div class="header">
               <div class="heading">
-                <h2>Sudents</h2>
+                <h2>Time Slots</h2>
               </div>
               <div class="add-btn">
-                <a href="/add-student" class="add-p">
+                <a href="/add-timeslot" class="add-p">
                   Add New
                 </a>
               </div>
@@ -36,12 +36,9 @@
                 <thead>
             
                   <tr>
-                    <th>Enrollment No</th>
-                    <th>Name</th>
-                    <th>Course</th>
-                   
-                    <th>Semester</th>
-                    <th>Batch</th>
+                    <th>Slot Id</th>
+                    <th>Start</th>
+                    <th>End</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -49,18 +46,16 @@
                 <tbody>
                 	
                 <?php
-                            foreach ($student as $row) {
+                            foreach ($timeslot as $row) {
                                 echo "<tr>";
-                                echo "<td>".$row['enroll_no']."</td>";
-                                echo "<td>".$row['stud_name']."</td>";
-                                echo "<td>".$row['program_name']."</td>";
-                                echo "<td>".$row['semester']."</td>";
-                                echo "<td>".$row['batch']."</td>";
-                            
+                                echo "<td>".$row['id']."</td>";
+                                echo "<td>".$row['start_time']."</td>";
+                                echo "<td>".$row['end_time']."</td>";
+                                
                                 ?>
 
-                                <td><a href="<?= base_url('update-student/'.$row['id'])?>" class="material-icons">edit</a>
-                                <a href="<?= base_url('delete-student/'.$row['id'])?>" class="material-icons">delete</a></td>
+                                <td><a href="<?= base_url('update-timeslot/'.$row['id'])?>" class="material-icons">edit</a>
+                                <a href="<?= base_url('delete-timeslot/'.$row['id'])?>" class="material-icons">delete</a></td>
 
                             </tr>
 

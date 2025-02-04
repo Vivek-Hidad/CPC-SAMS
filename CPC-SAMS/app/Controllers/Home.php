@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\ProgramModel;
 use App\Models\FacultyModel;
+use App\Models\ProgramModel;
 use App\Models\SubjectModel;
 use App\Models\StudentModel;
 use App\Models\SemesterModel;
+use App\Models\CoordinatorModel;
+use App\Models\TopicModel;
+use App\Models\SubjectallocationModel;
+use App\Models\TimeslotModel;
+use App\Models\AttendanceModel;
 
 class Home extends BaseController
 {
@@ -108,7 +113,21 @@ class Home extends BaseController
 
     public function dashboard()
     {
-        return view('dashboard');
+        // $subjectmodel= new SubjectModel();
+       
+        // $data['student']=$subjectmodel->getStudentAttendanceCount();
+        $topicmodel= new TopicModel();       
+        $data['student']=$topicmodel->getStudentAttendanceCount();
+        $k= $data['student'];
+
+       
+        foreach ($k as $key ) {
+             echo "<h4>";
+             print_r($key);
+             echo "</h4>";
+        }
+        
+        // return view('dashboard');
     }
 
    
