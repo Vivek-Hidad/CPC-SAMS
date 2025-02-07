@@ -19,9 +19,6 @@
        
         <?php include APPPATH . 'Views/header.php';?>
 
-
-          
-            
           <div class="card">
             <div class="header">
               <div class="heading">

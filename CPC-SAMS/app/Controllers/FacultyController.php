@@ -53,8 +53,6 @@ class FacultyController extends BaseController
             'name'=>'required|min_length[2]|max_length[100]',
             'username'=>'required|min_length[5]|max_length[100]|is_unique[faculties.username]',
             'password'=>'required|min_length[5]|max_length[100]|',
-           
-           
         ];
 
         if($this->validate($rules)){

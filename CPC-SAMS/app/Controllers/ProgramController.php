@@ -1,111 +1,90 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\ProgramModel;
-use App\Models\SubjectModel;
+use App\Models\CollegeModel;
+use CodeIgniter\Controller;
 
-
-class ProgramController extends BaseController
+class ProgramController extends Controller
 {
-   
-
-    //  Programssss Crud
-    // -----------------------------------------------------------------------------------
-    public function program()
+    public function index()
     {
-        $programmodel= new ProgramModel();
-        // $data['program']=$programmodel->findAll();
-        $data['program']=$programmodel->getProgramwithCoor();
-
-        return view('program-crud/allProgram',$data);
-        
+        $programModel = new ProgramModel();
+        $data['programs'] = $programModel->findAll();
+        return view('programs/index', $data);
     }
 
-    public function add_program()
+    public function add()
     {
-        return view('program-crud/addProgram');
+        $collegeModel = new CollegeModel();
+        $data['colleges'] = $collegeModel->findAll(); // Fetch all colleges for dropdown
+        return view('programs/add', $data);
     }
 
-
-    public function delete_program($id)
+    public function store()
     {
-        $subjectmmodel = new Subjectmodel();
-        $data=$subjectmmodel->where('program_id',$id)->delete();
-        $programmodel = new Programmodel();
-        $data=$programmodel->delete($id);
-        return redirect()->to(base_url('/programs'));
-    }
-
-    public function update_program($id)
-    {
-        $programmodel = new Programmodel();
-        $data['program']=$programmodel->find($id);
-        return view('program-crud/updateProgram',$data);
-    }
+        $programModel = new ProgramModel();
 
 
-    public function program_store()
-    {
-        
-        $rules = [
-            'program_name'=>'required|min_length[5]|max_length[100]|is_unique[programs.program_name]',
-           
+
+        $data = [
+            'college_code'      => $this->request->getPost('college_code'),
+            'program_name'      => $this->request->getPost('program_name'),
+            'program_duration'  => $this->request->getPost('program_duration'),
+            'program_type'      => $this->request->getPost('program_type'),
+            'total_semesters'   => $this->request->getPost('total_semesters'),
         ];
 
-        if($this->validate($rules)){
-                $programmodel = new ProgramModel();
-                $data = [
-                'program_name'=>$this->request->getVar('program_name'),
-                
-            ];
-            $programmodel->save($data);
-            
-            return redirect()->to(base_url('/programs'));
+        if (!$programModel->insert($data)) {
+            return redirect()->back()->withInput()->with('errors', $programModel->errors());
         }
-        else{
-            $data["validation"] = $this->validator;
-            return view('program-crud/addProgram',$data);
-        }
+
+        return redirect()->to('/programs')->with('success', 'Program added successfully');
     }
 
-    public function update_programstore($id)
+
+    public function edit($id)
     {
-        
-        $rules = [
-            'program_name'=>'required|min_length[5]|max_length[100]',
-           
-        ];
+        $programModel = new ProgramModel();
+        $collegeModel = new CollegeModel();
 
-        $data['program']=[
-            'id'=>$id,
-            'program_name'=>$this->request->getVar('program_name')
-        ];
-        if($this->validate($rules)){
-                $programmodel = new ProgramModel();
-                $programmodel->find($id);
+        $data['program'] = $programModel->find($id);
+        $data['colleges'] = $collegeModel->findAll();
 
-                $data = [
-                'program_name'=>$this->request->getVar('program_name'),
-                
-                 ];
-                
-                try{
-
-                    $programmodel->update($id,$data);
-                    return redirect()->to(base_url('/programs'));
-          
-                }catch(\Exception $e){
-                  
-              
-                  
-                    $data["validationdup"] = "Already exists";
-                    return view('program-crud/updateProgram',$data);
-                }
+        if (!$data['program']) {
+            return redirect()->to('/programs')->with('error', 'Program not found');
         }
-        else{
-            $data["validation"] = $this->validator;
-            return view('program-crud/updateProgram',$data);
-        }
+
+        return view('programs/edit', $data);
     }
 
+    public function update($id)
+    {
+        $programModel = new ProgramModel();
+
+        $data = [
+            'college_code'      => $this->request->getPost('college_code'),
+            'program_name'      => $this->request->getPost('program_name'),
+            'program_duration'  => $this->request->getPost('program_duration'),
+            'program_type'      => $this->request->getPost('program_type'),
+        ];
+
+        if (!$programModel->update($id, $data)) {
+            return redirect()->back()->withInput()->with('errors', $programModel->errors());
+        }
+
+        return redirect()->to('/programs')->with('success', 'Program updated successfully');
+    }
+
+    public function delete($id)
+    {
+        $programModel = new ProgramModel();
+
+        if (!$programModel->delete($id)) {
+            return redirect()->to('/programs')->with('error', 'Program not found');
+        }
+
+        return redirect()->to('/programs')->with('success', 'Program deleted successfully');
+    }
 }
